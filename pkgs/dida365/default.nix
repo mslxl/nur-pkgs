@@ -91,7 +91,9 @@ in stdenv.mkDerivation {
     runHook preInstall
     mkdir -p $out/bin
     ln -s ${dida365FHS}/bin/dida365-fhs $out/bin/dida
-    ln -s ${dida365Base}/usr/share/ $out
+    cp -r ${dida365Base}/usr/share/ $out
+    chmod -R u+w $out/share/applications/
+    sed -i "s@/opt/dida/dida@$out/bin/dida@g" $out/share/applications/*.desktop
     runHook postInstall
   '';
 
