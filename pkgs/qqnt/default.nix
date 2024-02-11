@@ -97,6 +97,7 @@ in stdenv.mkDerivation {
     cp -r ${qqntBase}/usr/share $out
     chmod -R u+w $out/share/applications/
     sed -i "s@/opt/QQ/qq@$out/bin/qq@g" $out/share/applications/*.desktop
+    sed -i "s@Icon=/usr/@Icon=$out/@" $out/share/applications/*.desktop
     runHook postInstall
   '';
 
