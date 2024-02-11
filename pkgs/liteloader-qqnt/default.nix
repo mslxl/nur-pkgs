@@ -135,6 +135,7 @@ in stdenv.mkDerivation {
     chmod -R u+w $out/share/applications/
     sed -i "s@/opt/QQ/qq@$out/bin/liteloader-qqnt@g" $out/share/applications/*.desktop
     sed -i "s@Name=.*@Name=QQ (with LiteLoader)@" $out/share/applications/*.desktop
+    sed -i "s@Icon=/usr/@Icon=$out/@" $out/share/applications/*.desktop
     runHook postInstall
   '';
 
