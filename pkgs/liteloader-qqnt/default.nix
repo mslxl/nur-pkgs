@@ -16,6 +16,7 @@
   gtk3,
   libnotify,
   libxkbcommon,
+  libGL,
   pango,
   expat,
   cairo,
@@ -106,6 +107,7 @@ let
       libuuid
       libkrb5
       libgcrypt
+      libGL
     ]) ++ (with pkgs.xorg; [
       libX11
       libXcursor
