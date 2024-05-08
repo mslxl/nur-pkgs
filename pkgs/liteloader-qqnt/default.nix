@@ -24,18 +24,18 @@
 }:
 let
   pname = "liteloader-qqnt";
-  version = "1.0.3";
-  qqVersion = "3.2.5_240305";
+  version = "1.1.1";
+  qqVersion = "3.2.7.23361";
 
   qqSrc = fetchurl {
-    url = "https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.5_240305_amd64_01.deb";
-    hash = "sha256-x/OU02oZYIKy4po/2buYKkSLaC3okfQBjF9is9nWCew=";
+    url = "https://dldir1.qq.com/qqfile/qq/QQNT/8b4fdf81/linuxqq_3.2.7-23361_amd64.deb";
+    hash = "sha256-UzQ+URI4ODAE88E54bo8i07UARZZsvNYEhiKPAP/9EE=";
   };
   liteloaderSrc = fetchFromGitHub {
     owner = "LiteLoaderQQNT";
     repo = "LiteLoaderQQNT";
     rev = version;
-    hash = "sha256-8PMYP2GQVvCYwGynrl4VNBRXGBXNne2hy96bZ3PRfa4=";
+    hash = "sha256-tq8QCOEbchfr3TJBDAZJhvjYPmQ996MyruBYgPdHTA8=";
   };
 
   liteloaderBase = stdenv.mkDerivation {
@@ -108,6 +108,7 @@ let
       libkrb5
       libgcrypt
       libGL
+      libGL.dev
     ]) ++ (with pkgs.xorg; [
       libX11
       libXcursor
