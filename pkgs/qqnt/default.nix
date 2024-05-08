@@ -23,10 +23,10 @@
 }:
 let
   pname = "qqnt";
-  version = "3.2.5_240305";
+  version = "3.2.7.23361";
   src = fetchurl {
-    url = "https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.5_240305_amd64_01.deb";
-    hash = "sha256-x/OU02oZYIKy4po/2buYKkSLaC3okfQBjF9is9nWCew=";
+    url = "https://dldir1.qq.com/qqfile/qq/QQNT/8b4fdf81/linuxqq_3.2.7-23361_amd64.deb";
+    hash = "sha256-UzQ+URI4ODAE88E54bo8i07UARZZsvNYEhiKPAP/9EE=";
   };
 
   qqntBase = stdenv.mkDerivation {
@@ -71,6 +71,7 @@ let
       libkrb5
       libgcrypt
       libGL
+      libGL.dev
     ]) ++ (with pkgs.xorg; [
       libX11
       libXcursor
