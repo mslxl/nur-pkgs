@@ -19,97 +19,106 @@
   pango,
   expat,
   cairo,
+  writeShellScript,
   ...
 }:
 let
-  pname = "qqnt";
-  version = "3.2.9.24568";
-  src = fetchurl {
+  baseVersion = "3.2.9.24568";
+  baseSrc = fetchurl {
     url = "https://dldir1.qq.com/qqfile/qq/QQNT/a663aa83/linuxqq_3.2.9-24568_amd64.deb";
     hash = "sha256-DcQWwep4p4aWUAoBNQ9Ge1QBiCxk6BhcziTDSHmRpgY=";
   };
+in rec {
+    qq-base = stdenv.mkDerivation {
+        version = baseVersion;
+        src = baseSrc;
+        pname = "qqnt";
+        dontConfigure = true;
+        dontBuild = true;
 
-  qqntBase = stdenv.mkDerivation {
-    inherit pname version src;
-    dontConfigure = true;
-    dontBuild = true;
+        nativeBuildInputs = [ dpkg ];
 
-    nativeBuildInputs = [ dpkg ];
+        installPhase = ''
+            runHook preInstall
+            mkdir -p $out/bin $out/opt $out/usr
+            mv usr/share $out/usr
+            mv opt/QQ $out/opt
+            ln -s $out/opt/QQ/qq $out/bin/qq
 
-    installPhase = ''
-      runHook preInstall
-      mkdir -p $out/bin $out/opt $out/usr
-      mv usr/share $out/usr
-      mv opt/QQ $out/opt
-      ln -s $out/opt/QQ/qq $out/bin/qq
+            runHook postInstall
+        '';
+    };
+    bundle = ({base ? qq-base, preStart ? "", pname ? "qq", appName ? "QQ", version ? base.version}:
+        let
+            fhs = buildFHSEnv {
+                name = "${pname}-fhs";
+                targetPkgs = pkgs: (with pkgs; [
+                    base
+                    udev
+                    alsa-lib
+                    glib
+                    nss
+                    nspr
+                    atk
+                    cups
+                    dbus
+                    gtk3
+                    libdrm
+                    mesa
+                    libnotify
+                    libxkbcommon
+                    pango
+                    cairo
+                    expat
+                    libuuid
+                    libkrb5
+                    libgcrypt
+                    libGL
+                    libGL.dev
+                ]) ++ (with pkgs.xorg; [
+                    libX11
+                    libXcursor
+                    libXrandr
+                    libXcomposite
+                    libXdamage
+                    libXext
+                    libXfixes
+                    libxcb
+                ]);
+                runScript =  "${writeShellScript "launch-qqnt-base" ''
+                    ${preStart}
+                    qq $*
+                ''} $*";
+            };
+        in stdenv.mkDerivation {
+            inherit pname version;
 
-      runHook postInstall
-    '';
-  };
+            dontUnpack = true;
+            dontConfigure = true;
+            dontBuild = true;
 
-  qqntFHS = buildFHSEnv {
-    name = "qqnt-fhs";
-    targetPkgs = pkgs: (with pkgs; [
-      qqntBase
-      udev
-      alsa-lib
-      glib
-      nss
-      nspr
-      atk
-      cups
-      dbus
-      gtk3
-      libdrm
-      mesa
-      libnotify
-      libxkbcommon
-      pango
-      cairo
-      expat
-      libuuid
-      libkrb5
-      libgcrypt
-      libGL
-      libGL.dev
-    ]) ++ (with pkgs.xorg; [
-      libX11
-      libXcursor
-      libXrandr
-      libXcomposite
-      libXdamage
-      libXext
-      libXfixes
-      libxcb
-    ]);
-    runScript = ''
-      qq $*
-    '';
-  };
-in stdenv.mkDerivation {
-  inherit pname version;
+            installPhase = ''
+                runHook preInstall
+                mkdir -p $out/bin
+                ln -s ${fhs}/bin/${pname}-fhs $out/bin/${pname}
+                cp -r ${base}/usr/share $out
+                chmod -R u+w $out/share/applications/
+                sed -i "s@/opt/QQ/qq@$out/bin/${pname}@g" $out/share/applications/*.desktop
+                sed -i "s@Name=.*@Name=${appName}@" $out/share/applications/*.desktop
+                sed -i "s@Icon=/usr/@Icon=$out/@" $out/share/applications/*.desktop
+                runHook postInstall
+            '';
 
-  dontUnpack = true;
-  dontConfigure = true;
-  dontBuild = true;
+            meta = with lib; {
+                description = "QQ9 轻松做自己";
+                homepage = "https://im.qq.com/linuxqq/index.shtml";
+                license = licenses.unfree;
+                maintainers = with maintainers; [ mslxl ];
+                platforms = [ "x86_64-linux" ];
+                mainProgram = "qq";
+            };
+        }
+    );
 
-  installPhase = ''
-    runHook preInstall
-    mkdir -p $out/bin $out/opt/QQ
-    ln -s ${qqntFHS}/bin/qqnt-fhs $out/bin/qq
-    cp -r ${qqntBase}/usr/share $out
-    chmod -R u+w $out/share/applications/
-    sed -i "s@/opt/QQ/qq@$out/bin/qq@g" $out/share/applications/*.desktop
-    sed -i "s@Icon=/usr/@Icon=$out/@" $out/share/applications/*.desktop
-    runHook postInstall
-  '';
-
-  meta = with lib; {
-    description = "QQ9 轻松做自己";
-    homepage = "https://im.qq.com/linuxqq/index.shtml";
-    license = licenses.unfree;
-    maintainers = with maintainers; [ mslxl ];
-    platforms = [ "x86_64-linux" ];
-    mainProgram = "qq";
-  };
+    fhs = bundle {};
 }

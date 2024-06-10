@@ -16,7 +16,7 @@
 
   dida365 = pkgs.callPackage ./pkgs/dida365 { };
   apifox = pkgs.callPackage ./pkgs/apifox { };
-  qqnt = pkgs.callPackage ./pkgs/qqnt { };
+  qqnt = (pkgs.callPackage ./pkgs/qqnt { }).fhs;
   liteloader-qqnt = pkgs.callPackage ./pkgs/liteloader-qqnt { };
   # ...
 }
