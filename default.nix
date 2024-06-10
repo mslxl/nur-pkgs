@@ -18,5 +18,6 @@
   apifox = pkgs.callPackage ./pkgs/apifox { };
   qqnt = (pkgs.callPackage ./pkgs/qqnt { }).fhs;
   liteloader-qqnt = pkgs.callPackage ./pkgs/liteloader-qqnt { };
+  ariang-native = pkgs.callPackage ./pkgs/ariang-native { };
   # ...
 }
