@@ -9,14 +9,14 @@
 }:
 let
   pname = "apifox";
-  version = "2.5.5";
+  version = "2.5.19";
   name = "${pname}-${version}";
-  sha256 = "JEXPNRCw1WXXSeHzIqzn5TGp1+tzsg/fcC/71rBITKc=";
+  hash = "sha256-+TlJoLkmNED7QG3Nya8k4sDaFSH0E6izm1Ex7HXZ9hY=";
 
   src = fetchzip {
     url = "https://cdn.apifox.com/download/Apifox-linux-latest.zip";
     stripRoot = false;
-    inherit sha256;
+    inherit hash;
   };
   appimage-file = "${src}/Apifox.AppImage";
 
