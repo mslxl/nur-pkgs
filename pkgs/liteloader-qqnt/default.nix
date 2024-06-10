@@ -25,11 +25,11 @@
 let
   pname = "liteloader-qqnt";
   version = "1.1.1";
-  qqVersion = "3.2.7.23361";
+  qqVersion = "3.2.9.24568";
 
   qqSrc = fetchurl {
-    url = "https://dldir1.qq.com/qqfile/qq/QQNT/8b4fdf81/linuxqq_3.2.7-23361_amd64.deb";
-    hash = "sha256-UzQ+URI4ODAE88E54bo8i07UARZZsvNYEhiKPAP/9EE=";
+    url = "https://dldir1.qq.com/qqfile/qq/QQNT/a663aa83/linuxqq_3.2.9-24568_amd64.deb";
+    hash = "sha256-DcQWwep4p4aWUAoBNQ9Ge1QBiCxk6BhcziTDSHmRpgY=";
   };
   liteloaderSrc = fetchFromGitHub {
     owner = "LiteLoaderQQNT";

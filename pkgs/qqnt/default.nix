@@ -23,10 +23,10 @@
 }:
 let
   pname = "qqnt";
-  version = "3.2.7.23361";
+  version = "3.2.9.24568";
   src = fetchurl {
-    url = "https://dldir1.qq.com/qqfile/qq/QQNT/8b4fdf81/linuxqq_3.2.7-23361_amd64.deb";
-    hash = "sha256-UzQ+URI4ODAE88E54bo8i07UARZZsvNYEhiKPAP/9EE=";
+    url = "https://dldir1.qq.com/qqfile/qq/QQNT/a663aa83/linuxqq_3.2.9-24568_amd64.deb";
+    hash = "sha256-DcQWwep4p4aWUAoBNQ9Ge1QBiCxk6BhcziTDSHmRpgY=";
   };
 
   qqntBase = stdenv.mkDerivation {
