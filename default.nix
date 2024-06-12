@@ -19,5 +19,6 @@
   qqnt = (pkgs.callPackage ./pkgs/qqnt { }).fhs;
   liteloader-qqnt = pkgs.callPackage ./pkgs/liteloader-qqnt { };
   ariang-native = pkgs.callPackage ./pkgs/ariang-native { };
+  typst-ts = pkgs.callPackage ./pkgs/typst-ts { };
   # ...
 }
