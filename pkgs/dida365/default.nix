@@ -18,14 +18,15 @@
   pango,
   expat,
   cairo,
+  libGL,
   ...
 }:
 let
   pname = "dida365";
-  version = "2.0.20";
+  version = "2.0.30";
   src = fetchurl {
     url = "https://cdn.dida365.cn/download/linux/linux_deb_x64/dida-${version}-amd64.deb";
-    hash = "sha256-ILiyAakT3kKXiNPYGKbML8id86A/2auEksZpUxx442k=";
+    hash = "sha256-9lTEhpoDbuYjXQlJY/Ho8ZNwXVlymWJ6G3WISTk9Elk=";
   };
 
   dida365Base = stdenv.mkDerivation {
@@ -66,6 +67,7 @@ let
       pango
       cairo
       expat
+      libGL
     ]) ++ (with pkgs.xorg; [
       libX11
       libXcursor
