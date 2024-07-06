@@ -23,10 +23,10 @@
   ...
 }:
 let
-  baseVersion = "3.2.9.24568";
+  baseVersion = "3.2.10-25493";
   baseSrc = fetchurl {
-    url = "https://dldir1.qq.com/qqfile/qq/QQNT/a663aa83/linuxqq_3.2.9-24568_amd64.deb";
-    hash = "sha256-DcQWwep4p4aWUAoBNQ9Ge1QBiCxk6BhcziTDSHmRpgY=";
+    url = "https://dldir1.qq.com/qqfile/qq/QQNT/40a24320/linuxqq_3.2.10-25493_amd64.deb";
+    hash = "sha256-Vcy3fP6ooiR3+i6VT0EQQ//Je++o+8YVgjqIs1thUh0=";
   };
 in rec {
     qq-base = stdenv.mkDerivation {
