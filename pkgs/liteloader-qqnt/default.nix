@@ -7,7 +7,7 @@
 } @ pkgs:
 let
   pname = "liteloader-qqnt";
-  liteloaderVersion = "1.1.1";
+  liteloaderVersion = "1.1.2";
 
   qqnt = pkgs.callPackage ../qqnt {};
 
@@ -18,7 +18,7 @@ let
       owner = "LiteLoaderQQNT";
       repo = "LiteLoaderQQNT";
       rev = liteloaderVersion;
-      hash = "sha256-tq8QCOEbchfr3TJBDAZJhvjYPmQ996MyruBYgPdHTA8=";
+      hash = "sha256-o9NLTSFPRMm+wdve60nF8BCthS/ZjTmheBvBFxE/YC8=";
     };
 
     dontConfigure = true;
