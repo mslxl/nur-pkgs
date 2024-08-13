@@ -23,10 +23,10 @@
 }:
 let
   pname = "dida365";
-  version = "2.0.30";
+  version = "6.0.0";
   src = fetchurl {
     url = "https://cdn.dida365.cn/download/linux/linux_deb_x64/dida-${version}-amd64.deb";
-    hash = "sha256-9lTEhpoDbuYjXQlJY/Ho8ZNwXVlymWJ6G3WISTk9Elk=";
+    hash = "sha256-fReOFuvWaKGvgfvPJZQDGgIX+x/RY/GG+DDJd7bnHa4=";
   };
 
   dida365Base = stdenv.mkDerivation {
