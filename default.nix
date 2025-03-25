@@ -20,5 +20,7 @@
   liteloader-qqnt = pkgs.callPackage ./pkgs/liteloader-qqnt { };
   ariang-native = pkgs.callPackage ./pkgs/ariang-native { };
   typst-ts = pkgs.callPackage ./pkgs/typst-ts { };
+  trzsz-go = pkgs.callPackage ./pkgs/trzsz-go { };
+  trzsz-ssh = pkgs.callPackage ./pkgs/trzsz-ssh { };
   # ...
 }
