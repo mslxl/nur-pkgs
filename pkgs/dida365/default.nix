@@ -9,7 +9,6 @@
   cups,
   dbus,
   libdrm,
-  xorg,
   mesa,
   buildFHSEnv,
   gtk3,
@@ -19,14 +18,15 @@
   expat,
   cairo,
   libGL,
+  libgbm,
   ...
 }:
 let
   pname = "dida365";
-  version = "6.0.20";
+  version = "6.0.30";
   src = fetchurl {
     url = "https://cdn.dida365.cn/download/linux/linux_deb_x64/dida-${version}-amd64.deb";
-    hash = "sha256-bzC3MDqqvZgVBsuw1ZWpya2ALrB88HsyY3AH0xtCMsI=";
+    hash = "sha256-C9zGBV52Br5pOTliXNgABMwTmdAMTl1B3nzHdlniRR4=";
   };
 
   dida365Base = stdenv.mkDerivation {
@@ -68,6 +68,7 @@ let
       cairo
       expat
       libGL
+      libgbm
     ]) ++ (with pkgs.xorg; [
       libX11
       libXcursor
